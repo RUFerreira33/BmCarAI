@@ -1,4 +1,8 @@
-export default function ChatHeader() {
+type ChatHeaderProps = {
+  onToggleArchitecture: () => void;
+};
+
+export default function ChatHeader({ onToggleArchitecture }: ChatHeaderProps) {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white px-6 py-5 shadow-sm">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between">
@@ -11,9 +15,12 @@ export default function ChatHeader() {
           </p>
         </div>
 
-        <div className="rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white">
-          Recomendação BMW
-        </div>
+        <button
+          onClick={onToggleArchitecture}
+          className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+          Ver Arquitetura
+        </button>
       </div>
     </header>
   );

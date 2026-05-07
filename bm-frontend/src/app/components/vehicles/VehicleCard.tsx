@@ -1,18 +1,36 @@
-type VehicleCardProps = {
-  vehicle: {
-    externalId: string;
-    name: string;
-    price: number;
-    kilometers: number;
-    fuel: string;
-    year: number;
-    imageUrl?: string;
-  };
+type Vehicle = {
+  externalId: string;
+  name: string;
+  slug: string;
+  brand: string;
+  model: string;
+  vehicleType: string;
+  segment: string;
+  price: number;
+  priceOriginal: number;
+  kilometers: number;
+  year: number;
+  powerHp: number;
+  fuel: string;
+  displacement: number;
+  isNew: boolean;
+  imageUrl?: string;
 };
 
-export default function VehicleCard({ vehicle }: VehicleCardProps) {
+type VehicleCardProps = {
+  vehicle: Vehicle;
+  onSelectVehicle: (vehicle: Vehicle) => void;
+};
+
+export default function VehicleCard({
+  vehicle,
+  onSelectVehicle,
+}: VehicleCardProps) {
   return (
-    <article className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <article
+      onClick={() => onSelectVehicle(vehicle)}
+      className="cursor-pointer overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+    >
       <div className="relative h-56 w-full bg-gray-100">
         {vehicle.imageUrl ? (
           <img
@@ -60,6 +78,10 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
             <p className="mt-1 font-medium text-gray-800">{vehicle.year}</p>
           </div>
         </div>
+
+        <p className="mt-4 text-sm font-semibold text-blue-600">
+          Ver detalhes →
+        </p>
       </div>
     </article>
   );

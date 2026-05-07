@@ -3,18 +3,31 @@ import VehicleCard from './VehicleCard';
 type Vehicle = {
   externalId: string;
   name: string;
+  slug: string;
+  brand: string;
+  model: string;
+  vehicleType: string;
+  segment: string;
   price: number;
+  priceOriginal: number;
   kilometers: number;
-  fuel: string;
   year: number;
+  powerHp: number;
+  fuel: string;
+  displacement: number;
+  isNew: boolean;
   imageUrl?: string;
 };
 
 type VehicleListProps = {
   vehicles: Vehicle[];
+  onSelectVehicle: (vehicle: Vehicle) => void;
 };
 
-export default function VehicleList({ vehicles }: VehicleListProps) {
+export default function VehicleList({
+  vehicles,
+  onSelectVehicle,
+}: VehicleListProps) {
   return (
     <section className="px-4 py-6">
       <div className="mx-auto max-w-6xl">
@@ -33,7 +46,11 @@ export default function VehicleList({ vehicles }: VehicleListProps) {
         ) : (
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
             {vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.externalId} vehicle={vehicle} />
+              <VehicleCard
+                key={vehicle.externalId}
+                vehicle={vehicle}
+                onSelectVehicle={onSelectVehicle}
+              />
             ))}
           </div>
         )}
